@@ -1,0 +1,23 @@
+token: "change-me"
+# 127.0.0.1 — только через ADB-туннель; для связи по Wi-Fi — 0.0.0.0
+listen: 127.0.0.1
+port: 8765
+# проброс порта на устройства через `adb reverse` (USB или беспроводная отладка):
+# deck сам пробует http://127.0.0.1:<port> и только потом URL из настроек.
+# Туннель приходит на localhost — listen должен быть 0.0.0.0 или 127.0.0.1
+adb: true
+# Расписание и уведомления присылают другие программы (QuickSchedule: [deck] url и token в его config.toml).
+# Кнопки «Войти» / «Открыть» на телефоне открывают ссылку на этом компьютере — только с такими схемами:
+# open_schemes: [http, https, tg]
+
+# приоритет плееров для playerctl
+players: "spotify,mpv,firefox,%any"
+
+# icon: имя иконки из hicolor/pixmaps (как Icon= в .desktop) или путь к png/svg
+apps:
+  - {id: firefox,  name: Firefox,  icon: firefox,                 cmd: firefox}
+  - {id: term,     name: Terminal, icon: kitty,                   cmd: kitty}
+  - {id: telegram, name: Telegram, icon: org.telegram.desktop,    cmd: Telegram}
+  - {id: steam,    name: Steam,    icon: steam,                   cmd: steam}
+  - {id: obs,      name: OBS,      icon: com.obsproject.Studio,   cmd: obs}
+  - {id: code,     name: VS Code,  icon: code,                    cmd: code}

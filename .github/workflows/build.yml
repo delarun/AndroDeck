@@ -1,0 +1,32 @@
+name: build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew --no-daemon assembleRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deck-apk
+          path: app/build/outputs/apk/release/*.apk
+
+  server:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r server/requirements.txt
+      # импорт читает конфиг и поднимает все маршруты — опечатка упадёт здесь
+      - run: DECK_CONFIG=server/config.example.yaml python -c "import sys; sys.path.insert(0, 'server'); import deckd"

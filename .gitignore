@@ -1,0 +1,15 @@
+# Gradle / Android
+.gradle/
+.kotlin/
+build/
+local.properties
+.idea/
+*.iml
+
+# Python
+__pycache__/
+.venv/
+
+# своё: конфиг с токеном и unit-файл с путями этой машины
+server/config.yaml
+server/deckd.service
